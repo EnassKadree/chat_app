@@ -3,7 +3,6 @@ import 'package:chat_app/View/Home/contacts_home_page.dart';
 import 'package:chat_app/View/Home/groups_home_page.dart';
 import 'package:chat_app/View/Home/settings_home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 
 class Layout extends StatefulWidget 

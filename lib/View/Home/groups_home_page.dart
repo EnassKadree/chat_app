@@ -1,7 +1,9 @@
+import 'package:chat_app/View/Group/create_group.dart';
+import 'package:chat_app/View/Group/widgets/group_card.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
-class GroupsHomePage extends StatefulWidget 
-{
+class GroupsHomePage extends StatefulWidget {
   const GroupsHomePage({super.key});
 
   @override
@@ -10,11 +12,34 @@ class GroupsHomePage extends StatefulWidget
 
 class _GroupsHomePageState extends State<GroupsHomePage> {
   @override
-  Widget build(BuildContext context) 
-  {
-    return Scaffold
-    (
-      appBar: AppBar(title: const Text('Groups'),),
-    );
+  Widget build(BuildContext context) {
+    return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreateGroupPage(),
+                ));
+          },
+          child: const Icon(Iconsax.message_add_1),
+        ),
+        appBar: AppBar(
+          title: const Text("Group"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Expanded(
+                  child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return const GroupCard();
+                },
+              ))
+            ],
+          ),
+        ));
   }
 }

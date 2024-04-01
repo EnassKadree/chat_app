@@ -1,4 +1,4 @@
-import 'package:chat_app/View/Chat/chat_card.dart';
+import 'package:chat_app/View/Chat/widgets/chat_card.dart';
 import 'package:chat_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -47,7 +47,7 @@ class _ChatsHomePageState extends State<ChatsHomePage> {
                         ],
                       ),
                       CustomTextFiled(hint: 'Email', icon: Iconsax.direct, controller: controller),
-                      SizedBox(height: 16,),
+                      const SizedBox(height: 16,),
                       ElevatedButton
                       (
                         style: ElevatedButton.styleFrom

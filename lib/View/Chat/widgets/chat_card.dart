@@ -1,5 +1,5 @@
 
-import 'package:chat_app/View/Chat/chat_screen.dart';
+import 'package:chat_app/View/Chat/chat_page.dart';
 import 'package:flutter/material.dart';
 
 class ChatCard extends StatelessWidget {
@@ -15,7 +15,7 @@ class ChatCard extends StatelessWidget {
       (
         onTap: () 
         {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ChatScreen()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ChatPage()));
         },
         title: const Text('Name'),
         subtitle: const Text('Last message'),

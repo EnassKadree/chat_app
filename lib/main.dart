@@ -1,4 +1,5 @@
 import 'package:chat_app/View/Auth/login_page.dart';
+import 'package:chat_app/layout.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.light),
         useMaterial3: true,
       ),
-      home: const LoginPage()
+      home: const Layout()
     );
   }
 }

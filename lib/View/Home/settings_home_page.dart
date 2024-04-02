@@ -1,5 +1,6 @@
 import 'package:chat_app/View/Settings/profile_page.dart';
 import 'package:chat_app/View/Settings/qr_code_page.dart';
+import 'package:chat_app/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
@@ -33,7 +34,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                 leading: const CircleAvatar(radius: 30,),
                 trailing: IconButton(icon: const Icon(Iconsax.scan_barcode), 
                 onPressed: ()
-                {Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QrCodePage()));},),
+                {navigateTo(context, const QrCodePage());},),
                 title: const Text('Name'),
                 minVerticalPadding: 40,
               ),
@@ -43,9 +44,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                 (
                   onTap: ()
                   {
-                    Navigator.of(context).push
-                      (MaterialPageRoute
-                        (builder: (context) => const ProfilePage()));
+                    navigateTo(context, const ProfilePage());
                   },
                   leading: const Icon(Iconsax.user),
                   trailing: const Icon(Iconsax.arrow_right_3),

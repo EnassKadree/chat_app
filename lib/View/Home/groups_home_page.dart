@@ -1,5 +1,6 @@
 import 'package:chat_app/View/Group/create_group.dart';
 import 'package:chat_app/View/Group/widgets/group_card.dart';
+import 'package:chat_app/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -16,11 +17,7 @@ class _GroupsHomePageState extends State<GroupsHomePage> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CreateGroupPage(),
-                ));
+            navigateTo(context, const CreateGroupPage());
           },
           child: const Icon(Iconsax.message_add_1),
         ),

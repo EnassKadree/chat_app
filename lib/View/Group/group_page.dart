@@ -1,5 +1,6 @@
 import 'package:chat_app/View/Group/group_member.dart';
 import 'package:chat_app/View/Group/widgets/group_message_card.dart';
+import 'package:chat_app/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,11 +29,7 @@ class _GroupPageState extends State<GroupPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const GroupMemberScreen(),
-                  ));
+              navigateTo(context, const GroupMemberScreen());
             },
             icon: const Icon(Iconsax.user),
           ),

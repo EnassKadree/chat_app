@@ -1,4 +1,5 @@
 import 'package:chat_app/View/Group/group_edit.dart';
+import 'package:chat_app/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -18,11 +19,7 @@ class _GroupMemberScreenState extends State<GroupMemberScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditGroupPage(),
-                  ));
+              navigateTo(context, const EditGroupPage());
             },
             icon: const Icon(Iconsax.user_edit),
           ),

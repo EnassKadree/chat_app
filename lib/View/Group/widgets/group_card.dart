@@ -1,4 +1,5 @@
 import 'package:chat_app/View/Group/group_page.dart';
+import 'package:chat_app/utils/navigator.dart';
 import 'package:flutter/material.dart';
 
 class GroupCard extends StatelessWidget {
@@ -11,10 +12,7 @@ class GroupCard extends StatelessWidget {
     return Card(
       child: ListTile(
           onTap: () => 
-          Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const GroupPage()),
-              ),
+          navigateTo(context, const GroupPage()),
           leading: const CircleAvatar(
             child: Text("G"),
           ),

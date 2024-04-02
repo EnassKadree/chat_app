@@ -1,7 +1,9 @@
 import 'package:chat_app/View/Auth/login_page.dart';
+import 'package:chat_app/utils/helpers/navigator.dart';
 import 'package:chat_app/widgets/elevated_button.dart';
 import 'package:chat_app/widgets/logo.dart';
 import 'package:chat_app/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,7 +30,10 @@ class _SetupProfileState extends State<SetupProfile>
           IconButton
           (
             onPressed: ()
-            {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginPage()), (route) => false);}, 
+            {
+              FirebaseAuth.instance.signOut(); 
+              navigateRemoveUntil(context, const LoginPage());
+            }, 
             icon: const Icon(Iconsax.logout_1)
           )
         ],

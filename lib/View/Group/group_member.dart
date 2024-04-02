@@ -1,5 +1,5 @@
 import 'package:chat_app/View/Group/group_edit.dart';
-import 'package:chat_app/utils/navigator.dart';
+import 'package:chat_app/utils/helpers/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

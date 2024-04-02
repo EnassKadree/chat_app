@@ -1,6 +1,7 @@
+import 'package:chat_app/View/Auth/login_page.dart';
 import 'package:chat_app/View/Settings/profile_page.dart';
 import 'package:chat_app/View/Settings/qr_code_page.dart';
-import 'package:chat_app/utils/navigator.dart';
+import 'package:chat_app/utils/helpers/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
@@ -68,7 +69,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                           ),
                         ),
                         actions: 
-                        [ElevatedButton(onPressed: (){Navigator.pop(context);}, child: const Text('Done'))],
+                        [ElevatedButton(onPressed: (){pop(context);}, child: const Text('Done'))],
                       );
                     });},
                   leading: const Icon(Iconsax.color_swatch),
@@ -84,12 +85,14 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                   title: const Text('Dark Mode'),
                 ),
               ),
-              const Card
+              Card
               (
                 child: ListTile
                 (
-                  trailing: Icon(Iconsax.logout_1),
-                  title: Text('Logout'),
+                  onTap: ()async 
+                  {navigateRemoveUntil(context, const LoginPage());},
+                  trailing: const Icon(Iconsax.logout_1),
+                  title: const Text('Sign out'),
                 ),
               ),
             ],

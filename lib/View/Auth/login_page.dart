@@ -1,9 +1,12 @@
 import 'package:chat_app/View/Auth/forget_password_page.dart';
-import 'package:chat_app/View/Auth/setup_profile.dart';
+import 'package:chat_app/layout.dart';
+import 'package:chat_app/utils/helpers/navigator.dart';
+import 'package:chat_app/utils/helpers/show_snack_bar.dart';
 import 'package:chat_app/widgets/elevated_button.dart';
 import 'package:chat_app/widgets/logo.dart';
 import 'package:chat_app/widgets/outlined_button.dart';
 import 'package:chat_app/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -58,24 +61,63 @@ class _LoginPageState extends State<LoginPage>
                         (
                           onTap: ()
                           {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ForgetPasswordPage()));
+                            navigateTo(context, const ForgetPasswordPage());
                           },
                           child: const Text('Forgot password?'),
                         )
                       ],
                     ),
                     const SizedBox(height: 16,),
-                    CustomElevatedButton(title: 'login', onPressed: ()
+                    CustomElevatedButton(title: 'login', onPressed: () async
                     {
                       if(formKey.currentState!.validate())
                       {
-                        debugPrint('validated');
+                        try 
+                        {
+                          await FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passController.text
+                          );
+                          navigateRemoveUntil(context, const Layout());
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            ShowSnackBar(context, 'No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            ShowSnackBar(context, 'Wrong password provided for that user.');
+                          }
+                          else 
+                          {
+                            ShowSnackBar(context, 'Something went wrong! please try again later');
+                          }
+                        } catch(e)
+                        {
+                          ShowSnackBar(context, 'Something went wrong!');
+                        }
                       }
                     },),
                     const SizedBox(height: 16,),
-                    CustomOutLinedButton(title: 'create account', onPressed: ()
+                    CustomOutLinedButton(title: 'create account', onPressed: () async
                     {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SetupProfile()));
+                      if(formKey.currentState!.validate())
+                      {
+                        try 
+                        {
+                          await FirebaseAuth.instance.createUserWithEmailAndPassword
+                          (
+                            email: emailController.text,
+                            password: passController.text,
+                          );
+                          navigateRemoveUntil(context, const Layout());
+                        } on FirebaseAuthException catch (e) 
+                        {
+                          if (e.code == 'weak-password') 
+                          {ShowSnackBar(context, 'The password provided is too weak.');} 
+                          else if (e.code == 'email-already-in-use') 
+                          {ShowSnackBar(context,'The account already exists for that email.');}
+                        } catch (e) {
+                          ShowSnackBar(context, e.toString());
+                        }
+                      }
                     },)
                   ],
                 )

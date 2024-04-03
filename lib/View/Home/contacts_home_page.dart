@@ -1,5 +1,5 @@
 import 'package:chat_app/View/Contact/contact_card.dart';
-import 'package:chat_app/widgets/text_field.dart';
+import 'package:chat_app/Widget/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

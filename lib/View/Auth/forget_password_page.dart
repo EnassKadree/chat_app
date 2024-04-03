@@ -1,8 +1,8 @@
 import 'package:chat_app/utils/helpers/navigator.dart';
 import 'package:chat_app/utils/helpers/show_snack_bar.dart';
-import 'package:chat_app/widgets/elevated_button.dart';
-import 'package:chat_app/widgets/logo.dart';
-import 'package:chat_app/widgets/text_field.dart';
+import 'package:chat_app/Widget/elevated_button.dart';
+import 'package:chat_app/Widget/logo.dart';
+import 'package:chat_app/Widget/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';

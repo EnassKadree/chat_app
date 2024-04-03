@@ -1,12 +1,10 @@
+import 'package:chat_app/Firebase/fire_auth.dart';
 import 'package:chat_app/View/Auth/forget_password_page.dart';
-import 'package:chat_app/layout.dart';
 import 'package:chat_app/utils/helpers/navigator.dart';
-import 'package:chat_app/utils/helpers/show_snack_bar.dart';
-import 'package:chat_app/widgets/elevated_button.dart';
-import 'package:chat_app/widgets/logo.dart';
-import 'package:chat_app/widgets/outlined_button.dart';
-import 'package:chat_app/widgets/text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_app/Widget/elevated_button.dart';
+import 'package:chat_app/Widget/logo.dart';
+import 'package:chat_app/Widget/outlined_button.dart';
+import 'package:chat_app/Widget/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -72,27 +70,8 @@ class _LoginPageState extends State<LoginPage>
                     {
                       if(formKey.currentState!.validate())
                       {
-                        try 
-                        {
-                          await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passController.text
-                          );
-                          navigateRemoveUntil(context, const Layout());
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            ShowSnackBar(context, 'No user found for that email.');
-                          } else if (e.code == 'wrong-password') {
-                            ShowSnackBar(context, 'Wrong password provided for that user.');
-                          }
-                          else 
-                          {
-                            ShowSnackBar(context, 'Something went wrong! please try again later');
-                          }
-                        } catch(e)
-                        {
-                          ShowSnackBar(context, 'Something went wrong!');
-                        }
+                        await FireAuth().loginUser
+                          (email: emailController.text, password: passController.text, context: context);
                       }
                     },),
                     const SizedBox(height: 16,),
@@ -100,23 +79,8 @@ class _LoginPageState extends State<LoginPage>
                     {
                       if(formKey.currentState!.validate())
                       {
-                        try 
-                        {
-                          await FirebaseAuth.instance.createUserWithEmailAndPassword
-                          (
-                            email: emailController.text,
-                            password: passController.text,
-                          );
-                          navigateRemoveUntil(context, const Layout());
-                        } on FirebaseAuthException catch (e) 
-                        {
-                          if (e.code == 'weak-password') 
-                          {ShowSnackBar(context, 'The password provided is too weak.');} 
-                          else if (e.code == 'email-already-in-use') 
-                          {ShowSnackBar(context,'The account already exists for that email.');}
-                        } catch (e) {
-                          ShowSnackBar(context, e.toString());
-                        }
+                        await FireAuth().registerUser
+                          (email: emailController.text, password: passController.text, context: context);
                       }
                     },)
                   ],

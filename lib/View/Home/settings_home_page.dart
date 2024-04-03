@@ -2,6 +2,7 @@ import 'package:chat_app/View/Auth/login_page.dart';
 import 'package:chat_app/View/Settings/profile_page.dart';
 import 'package:chat_app/View/Settings/qr_code_page.dart';
 import 'package:chat_app/utils/helpers/navigator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
@@ -36,7 +37,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                 trailing: IconButton(icon: const Icon(Iconsax.scan_barcode), 
                 onPressed: ()
                 {navigateTo(context, const QrCodePage());},),
-                title: const Text('Name'),
+                title:  Text(FirebaseAuth.instance.currentUser!.displayName!),
                 minVerticalPadding: 40,
               ),
               Card
@@ -90,7 +91,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                 child: ListTile
                 (
                   onTap: ()async 
-                  {navigateRemoveUntil(context, const LoginPage());},
+                  {await FirebaseAuth.instance.signOut(); navigateRemoveUntil(context, const LoginPage());},
                   trailing: const Icon(Iconsax.logout_1),
                   title: const Text('Sign out'),
                 ),

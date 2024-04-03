@@ -1,4 +1,5 @@
 import 'package:chat_app/View/Auth/login_page.dart';
+import 'package:chat_app/View/Auth/setup_profile.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/layout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,9 +26,9 @@ class MyApp extends StatelessWidget {
   .authStateChanges()
   .listen((User? user) {
     if (user == null) {
-      print('User is currently signed out!');
+      debugPrint('User is currently signed out!');
     } else {
-      print('User is signed in!');
+      debugPrint('User is signed in!');
     }
   });
     return MaterialApp
@@ -50,7 +51,16 @@ class MyApp extends StatelessWidget {
         builder: ((context, snapshot) 
         {
           if(snapshot.hasData)
-          {return const Layout();}
+          {
+            if(FirebaseAuth.instance.currentUser!.displayName == '' || FirebaseAuth.instance.currentUser!.displayName == null)
+            {
+              return const SetupProfile();
+            }
+            else 
+            {
+              return const Layout();
+            }
+          }
           else
           {return const LoginPage();}
         })

@@ -1,8 +1,10 @@
+import 'package:chat_app/Firebase/fire_auth.dart';
 import 'package:chat_app/View/Auth/login_page.dart';
+import 'package:chat_app/layout.dart';
 import 'package:chat_app/utils/helpers/navigator.dart';
-import 'package:chat_app/widgets/elevated_button.dart';
-import 'package:chat_app/widgets/logo.dart';
-import 'package:chat_app/widgets/text_field.dart';
+import 'package:chat_app/Widget/elevated_button.dart';
+import 'package:chat_app/Widget/logo.dart';
+import 'package:chat_app/Widget/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -63,11 +65,14 @@ class _SetupProfileState extends State<SetupProfile>
                   [
                     CustomTextFiled(hint: 'name', icon: Iconsax.direct, controller: nameController,),
                     const SizedBox(height: 16,),
-                    CustomElevatedButton(title: 'Continue', onPressed: ()
+                    CustomElevatedButton(title: 'Continue', onPressed: () async
                     {
                       if(formKey.currentState!.validate())
                       {
-                        print('');
+                        await FirebaseAuth.instance.currentUser!.
+                          updateDisplayName(nameController.text).
+                            then((value) { FireAuth().createUser(); navigateRemoveUntil(context, const Layout());});
+                          
                       }
                     },),
                   ],
